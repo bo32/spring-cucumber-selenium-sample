@@ -1,7 +1,5 @@
 package com.david.spring.cucumber.beans;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +13,16 @@ public class CucumberContext {
 		return new Sample();
 	}
 	
-	@Bean("WebDriver")
-	public FirefoxDriver getFirefoxWebDriver() {
-		System.setProperty("webdriver.gecko.driver", "/usr/bin/firefox");
-		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-		return new FirefoxDriver(capabilities);
+//	@Bean("WebDriver")
+//	public FirefoxDriver getFirefoxWebDriver() {
+//		System.setProperty("webdriver.gecko.driver", "/usr/bin/firefox");
+//		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+//		return new FirefoxDriver(capabilities);
+//	}
+	
+	@Bean(name="WebDriver", destroyMethod="close")
+	public SharedWebDriver getFirefoxWebDriver() {
+		return new SharedWebDriver();
 	}
 	
 	@Bean("WebDriverWait")

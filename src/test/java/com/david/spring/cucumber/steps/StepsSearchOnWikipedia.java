@@ -18,7 +18,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 @ContextConfiguration(classes={CucumberContext.class})
-public class StepsSearchWikipedia {
+public class StepsSearchOnWikipedia {
 	
 	@Autowired
 	private WebDriver webdriver;
