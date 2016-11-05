@@ -13,13 +13,6 @@ public class CucumberContext {
 		return new Sample();
 	}
 	
-//	@Bean("WebDriver")
-//	public FirefoxDriver getFirefoxWebDriver() {
-//		System.setProperty("webdriver.gecko.driver", "/usr/bin/firefox");
-//		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-//		return new FirefoxDriver(capabilities);
-//	}
-	
 	@Bean(name="WebDriver", destroyMethod="close")
 	public SharedWebDriver getFirefoxWebDriver() {
 		return new SharedWebDriver();
