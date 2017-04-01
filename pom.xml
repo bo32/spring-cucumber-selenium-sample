@@ -7,9 +7,12 @@
 
 	<properties>
 		<!-- got some issues with later Selenium versions -->
-		<seleniumVersion>2.53.1</seleniumVersion>
-		<cucumberVersion>1.2.5</cucumberVersion>
-		<springVersion>4.3.7.RELEASE</springVersion>
+		<selenium-version>2.53.1</selenium-version>
+		<cucumber-version>1.2.5</cucumber-version>
+		<spring-version>4.3.7.RELEASE</spring-version>
+		<slf4j-version>1.7.25</slf4j-version>
+		<logback-version>1.2.2</logback-version>
+		
 		<takeScreenshots>true</takeScreenshots>
 	</properties>
 
@@ -23,18 +26,18 @@
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-java</artifactId>
-			<version>${cucumberVersion}</version>
+			<version>${cucumber-version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-junit</artifactId>
-			<version>${cucumberVersion}</version>
+			<version>${cucumber-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-core</artifactId>
-			<version>${cucumberVersion}</version>
+			<version>${cucumber-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
@@ -44,38 +47,53 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>${seleniumVersion}</version>
+			<version>${selenium-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
-			<version>${seleniumVersion}</version>
+			<version>${selenium-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
-			<version>${seleniumVersion}</version>
+			<version>${selenium-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-spring</artifactId>
-			<version>${cucumberVersion}</version>
+			<version>${cucumber-version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${springVersion}</version>
+			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>${springVersion}</version>
+			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${springVersion}</version>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback-version}</version>
 		</dependency>
 	</dependencies>
 

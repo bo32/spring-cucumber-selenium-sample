@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Thanks to the project https://github.com/cucumber/cucumber-jvm
@@ -15,6 +17,7 @@ public class SharedWebDriver extends EventFiringWebDriver {
 
 	private static final DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 	private static final WebDriver REAL_DRIVER = new FirefoxDriver(capabilities);
+	private static final Logger logger = LoggerFactory.getLogger(SharedWebDriver.class);
 
 	private static final Thread CLOSE_THREAD = new Thread() {
 		@Override
@@ -36,7 +39,7 @@ public class SharedWebDriver extends EventFiringWebDriver {
 	@Override
 	public void close() {
 		if (Thread.currentThread() != CLOSE_THREAD) {
-			System.out.println("You shouldn't close this WebDriver. It's shared and will close when the JVM exits.");
+			logger.info("You shouldn't close this WebDriver. It's shared and will close when the JVM exits.");
 		}
 		super.close();
 	}
