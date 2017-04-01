@@ -9,16 +9,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-
-import com.david.spring.cucumber.beans.CucumberContext;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-@ContextConfiguration(classes={CucumberContext.class})
-public class StepsSearchOnWikipedia {
+public class StepsSearchOnWikipedia extends ParentSteps {
 	
 	@Autowired
 	private WebDriver webdriver;

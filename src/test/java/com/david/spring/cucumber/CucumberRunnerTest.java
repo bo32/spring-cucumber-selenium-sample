@@ -7,8 +7,11 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features = {"src/test/resources/com/david/spring/cucumber/features"},
-		plugin = {"pretty", "html:target/cucumber"}) 
+		features = {"src/test/java/com/david/spring/cucumber/features"},
+		plugin = {
+				"pretty", 
+				"html:target/cucumber"
+		}) 
 public class CucumberRunnerTest {
 
 }
