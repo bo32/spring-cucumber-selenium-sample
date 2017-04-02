@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cucumber.api.java.en.Given;
@@ -21,15 +23,7 @@ public class StepsSearchOnWikipedia extends ParentSteps {
 	@Autowired
 	private WebDriverWait wait;
 	
-	@Given("^I type a string Selenium$")
-	public void i_type_a_string_Selenium() throws Throwable {
-	    webdriver.findElement(By.xpath("//*[@id=\"searchInput\"]")).sendKeys("Selenium");
-	}
-
-	@Given("^I type a string Cucumber$")
-	public void i_type_a_string_Cucumber() throws Throwable {
-		webdriver.findElement(By.xpath("//*[@id=\"searchInput\"]")).sendKeys("Cucumber");
-	}
+	private final static Logger logger = LoggerFactory.getLogger(StepsSearchOnWikipedia.class);
 	
 	@When("^I select the suggestion at the index (\\d+)$")
 	public void i_select_the_suggestion_at_the_index(int index) throws Throwable {
@@ -40,17 +34,35 @@ public class StepsSearchOnWikipedia extends ParentSteps {
 		List<WebElement> links = select.findElements(By.tagName("a"));
 		links.get(index - 1).click();
 	}
-
-	@Then("^I should redirected to the Selenium article$")
-	public void i_should_redirected_to_the_Selenium_article() throws Throwable {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"firstHeading\"]")));
-	    Assert.assertEquals("https://en.wikipedia.org/wiki/Selenium", webdriver.getCurrentUrl());
-	}
 	
-	@Then("^I should redirected to the Cucumber article$")
-	public void i_should_redirected_to_the_Cucumber_article() throws Throwable {
+	@Given("^I type a string \"([^\"]*)\"$")
+	public void i_type_a_string(String article) throws Throwable {
+		webdriver.findElement(By.xpath("//*[@id=\"searchInput\"]")).sendKeys(article);
+	}
+
+	@When("^I select the technical suggestion$")
+	public void i_select_the_technical_suggestion() throws Throwable {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("suggestions-results")));
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[6]/div")));
+		WebElement select = webdriver.findElement(By.xpath("/html/body/div[6]/div"));
+		List<WebElement> links = select.findElements(By.tagName("a"));
+		logger.debug("count links: " + links.size());
+		
+		for (WebElement link: links) {
+			String linkText = link.getText();
+			logger.debug("link text: " + linkText);
+			if(linkText.contains("software") || linkText.contains("language") || linkText.contains("IT")) {
+				link.click();
+				return;
+			}
+		}
+	}
+
+	@Then("^I should redirected to the \"([^\"]*)\" article$")
+	public void i_should_redirected_to_the_article(String article) throws Throwable {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"firstHeading\"]")));
-	    Assert.assertEquals("https://en.wikipedia.org/wiki/Cucumber", webdriver.getCurrentUrl());
+	    Assert.assertEquals("https://en.wikipedia.org/wiki/" + article, webdriver.getCurrentUrl());
 	}
 
 }
