@@ -11,11 +11,9 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -24,13 +22,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class StepsSearchEngine extends ParentSteps {
-	
-	@Autowired
-	private WebDriver webdriver;
-	@Autowired
-	private boolean screenshotOnFailure;
-	@Autowired
-	private String screenshotDestinationFolder;
 	
 	private static final Logger logger = LoggerFactory.getLogger(StepsSearchEngine.class);
 	

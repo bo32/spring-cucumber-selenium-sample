@@ -24,5 +24,13 @@ public class PropertiesContext {
 	public String getScreenshotDestinationFolder() {
 		return screenshotDestinationFolder;
 	}
+	
+	@Value("${selenium.webbrowser}")
+	private String webbrowser;
+	
+	@Bean("webbrowser")
+	public String getWebbrowser() {
+		return webbrowser;
+	}
 
 }

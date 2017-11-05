@@ -7,13 +7,14 @@
 
 	<properties>
 		<!-- got some issues with later Selenium versions -->
-		<selenium-version>2.53.1</selenium-version>
+		<selenium-version>3.6.0</selenium-version>
 		<cucumber-version>1.2.5</cucumber-version>
-		<spring-version>4.3.7.RELEASE</spring-version>
+		<spring-version>5.0.1.RELEASE</spring-version>
 		<slf4j-version>1.7.25</slf4j-version>
-		<logback-version>1.2.2</logback-version>
+		<logback-version>1.2.3</logback-version>
 		
 		<takeScreenshots>true</takeScreenshots>
+		<webbrowser>firefox</webbrowser>
 	</properties>
 
 	<dependencies>
@@ -55,14 +56,15 @@
 			<version>${selenium-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
-			<version>${selenium-version}</version>
-		</dependency>
-		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-spring</artifactId>
 			<version>${cucumber-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-jvm-deps</artifactId>
+			<version>1.0.5</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -98,13 +100,29 @@
 	</dependencies>
 
 	<build>
+	
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.7.0</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
-				<includes>
-					<include>**/application.properties</include>
-				</includes>
+				<!-- <includes>
+					<include>application.properties</include>
+					<include>/home/david/Téléchargements/geckodriver</include>
+				</includes> -->
 			</resource>
 		</resources>
 	</build>

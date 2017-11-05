@@ -18,11 +18,6 @@ import cucumber.api.java.en.When;
 
 public class StepsSearchOnWikipedia extends ParentSteps {
 	
-	@Autowired
-	private WebDriver webdriver;
-	@Autowired
-	private WebDriverWait wait;
-	
 	private final static Logger logger = LoggerFactory.getLogger(StepsSearchOnWikipedia.class);
 	
 	@When("^I select the suggestion at the index (\\d+)$")
