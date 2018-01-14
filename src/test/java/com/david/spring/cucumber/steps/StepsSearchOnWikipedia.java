@@ -4,13 +4,12 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.david.spring.cucumber.pageobjects.wikipedia.WikipediaHomePage;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -32,7 +31,8 @@ public class StepsSearchOnWikipedia extends ParentSteps {
 	
 	@Given("^I type a string \"([^\"]*)\"$")
 	public void i_type_a_string(String article) throws Throwable {
-		webdriver.findElement(By.xpath("//*[@id=\"searchInput\"]")).sendKeys(article);
+		WikipediaHomePage page = new WikipediaHomePage(webdriver);
+		page.searchText(article);
 	}
 
 	@When("^I select the technical suggestion$")

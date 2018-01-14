@@ -8,12 +8,14 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.david.spring.cucumber.pageobjects.duckduckgo.DuckduckgoHomePage;
+import com.david.spring.cucumber.pageobjects.duckduckgo.DuckduckgoResultsPage;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -24,26 +26,28 @@ import cucumber.api.java.en.When;
 public class StepsSearchEngine extends ParentSteps {
 	
 	private static final Logger logger = LoggerFactory.getLogger(StepsSearchEngine.class);
+	private DuckduckgoHomePage homePage;
+	private DuckduckgoResultsPage resultsPage;
 	
 	@Given("^I am on the search engine home page \"([^\"]*)\"$")
 	public void i_am_on_the_search_engine_home_page(String url) throws Throwable {
-		webdriver.get(url);  
+		webdriver.get(url);
+		homePage = new DuckduckgoHomePage(webdriver);
 	}
 
 	@Given("^I enter a string \"([^\"]*)\"$")
 	public void i_enter_a_string(String research) throws Throwable {
-		webdriver.findElement(By.xpath("//*[@id=\"search_form_input_homepage\"]")).sendKeys(research);
+		homePage.inputText(research);
 	}
 
 	@When("^I press the search button$")
 	public void i_press_the_search_button() throws Throwable {
-		webdriver.findElement(By.xpath("//*[@id=\"search_button_homepage\"]")).click();
+		resultsPage = homePage.clickOnSearchButton();
 	}
 
 	@Then("^I should see some results$")
 	public void i_should_see_some_results() throws Throwable {
-		WebElement links = webdriver.findElement(By.xpath("//*[@id=\"links\"]"));
-		List<WebElement> results = links.findElements(By.className("result"));
+		List<WebElement> results = resultsPage.getAllResults();
 		Assert.assertTrue(results.size() > 0);
 	}
 

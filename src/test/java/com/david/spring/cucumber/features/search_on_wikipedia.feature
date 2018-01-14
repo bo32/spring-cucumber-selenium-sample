@@ -13,6 +13,6 @@ Feature: As a user, I want to look for an article on Wikipedia
     Then I should redirected to the "<article>" article
 
     Examples: 
-      | search   | article             |
-      | Selenium | Selenium_(software) |
-      | Gherkin  | Cucumber_(software) |
+      | search   | article                     |
+      | Selenium | Selenium_(software)         |
+      | Java     | Java_(programming_language) |
