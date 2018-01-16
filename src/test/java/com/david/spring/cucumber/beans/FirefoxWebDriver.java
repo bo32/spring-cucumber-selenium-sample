@@ -27,7 +27,6 @@ public class FirefoxWebDriver extends EventFiringWebDriver {
 
 	static {
 		System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver");
-//		System.setProperty("webdriver.gecko.driver", "/usr/bin/firefox");
 		
 		FirefoxOptions capabilities = new FirefoxOptions();
 		webdriver = new FirefoxDriver(capabilities);

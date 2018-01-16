@@ -1,10 +1,7 @@
 package com.david.spring.cucumber.steps;
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,39 +16,24 @@ public class StepsSearchOnWikipedia extends ParentSteps {
 	
 	private final static Logger logger = LoggerFactory.getLogger(StepsSearchOnWikipedia.class);
 	
-	@When("^I select the suggestion at the index (\\d+)$")
-	public void i_select_the_suggestion_at_the_index(int index) throws Throwable {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("suggestions-results")));
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[6]/div")));
-		WebElement select = webdriver.findElement(By.xpath("/html/body/div[6]/div"));
-		List<WebElement> links = select.findElements(By.tagName("a"));
-		links.get(index - 1).click();
-	}
+	private WikipediaHomePage wikiHomePage;
 	
 	@Given("^I type a string \"([^\"]*)\"$")
 	public void i_type_a_string(String article) throws Throwable {
-		WikipediaHomePage page = new WikipediaHomePage(webdriver);
-		page.searchText(article);
+		wikiHomePage = new WikipediaHomePage(webdriver);
+		wikiHomePage.searchText(article);
+	}
+	
+	@When("^I select the suggestion at the index (\\d+)$")
+	public void i_select_the_suggestion_at_the_index(int index) throws Throwable {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("suggestions-results")));
+		wikiHomePage.selectSuggestionAtIndex(index);
 	}
 
 	@When("^I select the technical suggestion$")
 	public void i_select_the_technical_suggestion() throws Throwable {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("suggestions-results")));
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[6]/div")));
-		WebElement select = webdriver.findElement(By.xpath("/html/body/div[6]/div"));
-		List<WebElement> links = select.findElements(By.tagName("a"));
-		logger.debug("count links: " + links.size());
-		
-		for (WebElement link: links) {
-			String linkText = link.getText();
-			logger.debug("link text: " + linkText);
-			if(linkText.contains("software") || linkText.contains("language") || linkText.contains("IT")) {
-				link.click();
-				return;
-			}
-		}
+		wikiHomePage.selectTheTechnicalResult();
 	}
 
 	@Then("^I should redirected to the \"([^\"]*)\" article$")
