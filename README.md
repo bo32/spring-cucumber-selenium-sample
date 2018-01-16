@@ -17,4 +17,14 @@ Having Firefox installed.
 If it's not the case, or if you are not on Linux, or if your Firefox location is not the default one (/usr/bin/firefox), change the driver's configuration in the ShareWebDriver class.
 This project purpose is to show how to reuse a web driver bean through all the different steps.
 
+## Run the tests
+### on Firefox
+```bash
+mvn clean test
+```
+
+### on Chrome
+```bash
+mvn clean test -Dwebbrowser=chrome
+```
 
