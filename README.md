@@ -11,19 +11,13 @@ Some simple extras features useful for a Selenium project are also implemented a
  - take a screenshot with Selenium when an error occurs;
  - use Maven and global properties for the behavior of the application; 
 
-## Requirements
-
-Having Firefox installed.
-If it's not the case, or if you are not on Linux, or if your Firefox location is not the default one (/usr/bin/firefox), change the driver's configuration in the ShareWebDriver class.
-This project purpose is to show how to reuse a web driver bean through all the different steps.
-
 ## Run the tests
-### on Firefox
+### Choose the web-browser
+To use Firefox:  
 ```bash
 mvn clean test
 ```
-
-### on Chrome
+To use Chrome:  
 ```bash
 mvn clean test -Dwebbrowser=chrome
 ```
